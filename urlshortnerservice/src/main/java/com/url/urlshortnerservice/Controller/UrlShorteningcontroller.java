@@ -54,6 +54,7 @@ public class UrlShorteningcontroller {
             return new ResponseEntity<UrlErrorResponseDto>(urlErrorResponseDto, HttpStatus.OK);
         }
         if (urlToRet.getExpirationDate().isBefore(LocalDateTime.now())) {
+            urlService.deleteShortLink(urlToRet);
             UrlErrorResponseDto urlErrorResponseDto = new UrlErrorResponseDto();
             urlErrorResponseDto.setError("Url has expired");
             urlErrorResponseDto.setStatus("400");
